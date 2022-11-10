@@ -1,10 +1,12 @@
 import React from 'react'
 
-const Index = () => {
+const Footer = () => {
   return (
     <div>
+      Footer
     </div>
   )
 }
 
-export default Index
+export default Footer
+Footer
