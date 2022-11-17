@@ -1,10 +1,12 @@
 import React from 'react'
-import Carosel from '../../components/ui/Carosel'
+import Campaigns from '../../components/Campaigns'
+import Carosel from '../../components/Carosel'
 
 const Index = () => {
   return (
     <div>
       <Carosel/>
+      <Campaigns/>
     </div>
   )
 }
