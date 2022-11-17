@@ -1,12 +1,14 @@
 import React from 'react'
 import Campaigns from '../../components/Campaigns'
-import Carosel from '../../components/Carosel'
+import Carousel from '../../components/Carousel'
+import MenuWrapper from '../../components/product/MenuWrapper'
 
 const Index = () => {
   return (
     <div>
-      <Carosel/>
+      <Carousel/>
       <Campaigns/>
+      <MenuWrapper/>
     </div>
   )
 }
