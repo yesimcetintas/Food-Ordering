@@ -22,7 +22,6 @@ const Reservation = () => {
     onSubmit,
     validationSchema: reservationSchema,
   })
-
     const inputs = [
         {
           id: 1,
