@@ -13,7 +13,7 @@ const Account = () => {
     const {values, errors, touched, handleChange, handleSubmit, handleBlur} = useFormik({
         initialValues:{
           fullName:"",
-          phoneNumber:"",
+          email:"",
           phoneNumber:"",
           address:"",
           job:"",
