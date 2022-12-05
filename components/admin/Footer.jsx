@@ -7,17 +7,8 @@ import { useState } from 'react';
 
 const Footer = () => {
   const [linkAddress, setLinkAddress] = useState("")
-  const [iconName, setIconName] = useState("fa fa-")
+  const [iconName, setIconName] = useState("fa fa-");
   const [icons, setIcons] = useState(["fa fa-facebook", "fa fa-twitter", "fa fa-linkedin"])
-
-  const handleChangeIcon = (e) => {
-    setIconName(e.target.value)
-  }
-
-  const addIcon = () => {
-    setIcons([...icons, iconName]);
-    setIconName("fa fa-");
-  }
 
   const onSubmit = async (values, actions) => {
       await new Promise((resolve) => setTimeout(resolve, 4000))
@@ -112,13 +103,17 @@ const Footer = () => {
             value="https://"
             onChange=""/>
           <Input 
-            placeholder="Icon Name" 
-            onChange={handleChangeIcon}
+            placeholder="Icon Name"
+            // defaulValue="fa fa-"
+            onChange={(e) => setIconName(e.target.value)}
             value={iconName}/>
           <button 
             className="btn-primary" 
             type='button' 
-            onClick={addIcon}>
+            onClick={() => {
+              setIcons([...icons, iconName]);
+              setIconName("fa fa-");
+            }}>
               Add
             </button>
         </div>
