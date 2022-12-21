@@ -1,22 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Title from "../../components/ui/Title"
 import Input from "../../components/form/input"
 import { useFormik } from 'formik';
 import { loginSchema } from '../../schema/login';
 import Link from "next/link"
-import { useSession, signIn } from "next-auth/react"
+import { signIn, getSession, useSession } from "next-auth/react"
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const Login = () => {
-
-  const { data: session } = useSession();
+  const {data: session} = useSession()
+  const {push} = useRouter()
+  const [currentUser, setCurrentUser] = useState()
 
   const onSubmit = async (values, actions) => {
     const { email, password } = values;
       let options = { redirect: false, email, password };
-      const res = await signIn("credentials", options);
-      // actions.resetForm();
+      try {
+        const res = await signIn("credentials", options);
+        actions.resetForm();
+      } catch (err) {
+        console.log(err)
+      }
   }
-  console.log(session);
+
+  useEffect(()=>{
+    const getUser = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`)
+        setCurrentUser(
+          res.data?.find((user)=>user.email === session?.user?.email)
+        )
+        push("/profile/" + currentUser?._id)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getUser()
+  },[session, push, currentUser])
 
   const {values, errors, touched, handleChange, handleSubmit, handleBlur} = useFormik({
     initialValues:{
@@ -74,6 +95,23 @@ const Login = () => {
       </form>
     </div>
   )
+}
+
+export async function getServerSideProps({req}){
+  const session = await getSession({req})
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`)
+  const user = res.data?.find((user)=>user.email === session?.user.email)
+  if(session && user){
+    return{
+      redirect: {
+        destination: "/profile/" + user._id,
+        permanent: false
+      }
+    }
+  }
+  return{
+    props: {}
+  }
 }
 
 export default Login
