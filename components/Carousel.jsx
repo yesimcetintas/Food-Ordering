@@ -30,7 +30,8 @@ const Carousel = () => {
             src="/images/hero-bg.jpeg"
             alt=''
             layout="fill"
-            objectFit='cover'/> 
+            objectFit='cover'
+            priority/> 
         </div>
       </div>
       <Slider {...settings}>

@@ -13,6 +13,7 @@ const CampaignsItem = () => {
           layout="fill"
           className="hover:scale-105 transition-all"
           objectFit="cover"
+          priority
         />
       </div>
       <div className='text-white my-1'>

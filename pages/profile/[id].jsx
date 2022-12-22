@@ -35,7 +35,7 @@ const Profile = ({user}) => {
     <div className='flex px-10 min-h-[calc(100vh_-_433px)] lg:flex-row flex-col mb-10'>
         <div className='lg:w-80 w-full flex-shrink-0'>
             <div className='relative flex flex-col items-center px-10 py-5 border border-b-0'>
-                <Image src={user.image ? user.image : "/images/client2.jpg"} alt='' width={100} height={100} className="rounded-full"/>
+                <Image src={user.image ? user.image : "/images/client1.jpeg"} alt='' width={100} height={100} className="rounded-full"/>
                 <b className='text-2xl mt-1'>{user.fullName}</b>
             </div>
                 <ul className='text-center font-semibold'>
