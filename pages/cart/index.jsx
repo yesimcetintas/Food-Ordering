@@ -30,7 +30,7 @@ const Index = () => {
                             <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white'>
                                 {
                                     product.extras.map((extra)=>
-                                        <span key={extra.id}>{extra.name}, </span>
+                                        <span key={extra.id}>{extra.text}, </span>
                                     )
                                 }
                             </td>
