@@ -1,7 +1,8 @@
 import React from 'react'
 import Image from "next/image"
+import axios from 'axios';
 
-const Order = () => {
+const Order = ({order}) => {
   return (
     <div className='overflow-x-auto'>
         <div className='min-h-[calc(100vh_-_433px)] flex justify-center items-center flex-col p-10 min-w-[1000px]'>
@@ -18,13 +19,13 @@ const Order = () => {
                     <tbody>
                         <tr className=' bg-secondary border-gray-700 hover:bg-primary transition-all'>
                             <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white flex items-center gap-x-1 justify-center'> 
-                                63028473645...
+                                {order?._id.substring(0,5)}...
                             </td>
                             <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white'>
-                                Yeşim Çetintaş
+                                {order?.customer}
                             </td>
-                            <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white'>Bursa</td>
-                            <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white'>$16</td>
+                            <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white'>{order?.address}</td>
+                            <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white'>${order?.total}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -52,5 +53,17 @@ const Order = () => {
 
   )
 }
+
+export const getServerSideProps = async ({ params }) => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/orders/${params.id}`
+    );
+  
+    return {
+      props: {
+        order: res.data ? res.data : null,
+      },
+    };
+  };
 
 export default Order
