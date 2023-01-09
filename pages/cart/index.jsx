@@ -65,10 +65,10 @@ const Index = ({userList}) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {cart.products.map((product)=>
-                            <tr className=' bg-secondary border-gray-700 hover:bg-primary transition-all' key={product._id}>
+                        {cart.products.map((product,index)=>
+                            <tr className=' bg-secondary border-gray-700 hover:bg-primary transition-all' key={index}>
                             <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white flex items-center gap-x-1 justify-center'> 
-                                <Image src="/images/f1.png" alt='' width={20} height={20}/>
+                                <Image src={product?.img} alt='' width={20} height={20}/>
                                 <span>{product.name}</span>
                             </td>
                             <td className='py-4 px-6 font-medium whitespace-nowrap hover:text-white'>
