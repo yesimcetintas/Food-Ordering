@@ -3,6 +3,12 @@ import Image from "next/image"
 import axios from 'axios';
 
 const Order = ({order}) => {
+    const status = order?.status
+    const statusClass = (index) =>{
+        if(index-status<1) return ""
+        if(index-status === 1) return "animate-pulse"
+        if(index-status >1) return ""
+    }
   return (
     <div className='overflow-x-auto'>
         <div className='min-h-[calc(100vh_-_433px)] flex justify-center items-center flex-col p-10 min-w-[1000px]'>
@@ -31,19 +37,19 @@ const Order = ({order}) => {
                 </table>
             </div>
             <div className='flex justify-between w-full p-10 bg-primary mt-6'>
-                <div className='relative flex flex-col'>
+                <div className={`relative flex flex-col ${statusClass(0)}`}>
                     <Image src="/images/paid.png" alt='' width={50} height={50} objectFit="contain"/>
                     <span>Payment</span>
                 </div>
-                <div className='relative flex flex-col animate-pulse'>
+                <div className={`relative flex flex-col ${statusClass(1)}`}>
                     <Image src="/images/bake.png" alt='' width={50} height={50} objectFit="contain"/>
                     <span>Preparing</span>
                 </div>
-                <div className='relative flex flex-col'>
+                <div className={`relative flex flex-col ${statusClass(2)}`}>
                     <Image src="/images/bike.png" alt='' width={50} height={50} objectFit="contain"/>
                     <span>On the way</span>
                 </div>
-                <div className='relative flex flex-col'>
+                <div className={`relative flex flex-col ${statusClass(3)}`}>
                     <Image src="/images/delivered.png" alt='' width={50} height={50} objectFit="contain"/>
                     <span>Delivered</span>
                 </div>
