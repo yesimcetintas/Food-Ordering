@@ -23,8 +23,6 @@ const Index = ({userList}) => {
         method: 0,
     }
 
-    console.log("newOrder", newOrder)
-
     const createOrder = async () => {
         try {
             if(session){
