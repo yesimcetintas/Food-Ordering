@@ -12,33 +12,39 @@ const Header = () => {
     const [isSearchModal, setIsSearchModal] = useState(false)
     const [isMenuModal, setIsMenuModal] = useState(false);
     const cart = useSelector((state) => state.cart);
-
     const router = useRouter()
 
   return (
-    // <div className='h-[5.5rem] bg-secondary '>
     <div
-    className={`h-[5.5rem] z-50 relative ${
-      router.asPath === "/" ? "bg-transparent" : "bg-secondary"
+    className={`h-[5.5rem] z-50 relative w-full ${
+      router.asPath === "/" ? "bg-transparent" : "bg-secondary !fixed"
     }`}>
       <div className='container mx-auto flex justify-between text-white items-center h-full'>
         <Logo/>
             <nav
-                className={`sm:static absolute top-0 left-0 sm:w-auto sm:h-auto w-full h-screen sm:text-white text-black sm:bg-transparent bg-white sm:flex hidden  ${
+                className={`sm:static absolute top-0 left-0 sm:w-auto sm:h-auto w-full h-screen sm:text-white text-black sm:bg-transparent bg-white sm:flex hidden z-50 ${
                     isMenuModal === true && "!grid place-content-center"
                   }`}>
                 <ul className="flex gap-x-2 sm:flex-row flex-col items-center">
-                    <li className='px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer'>
-                      <Link href="/">Home</Link>
+                    <li 
+                      className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${router.asPath==="/" && "text-primary"}`}
+                      onClick={()=>setIsMenuModal(false)}>
+                        <Link href="/">Home</Link>
                     </li>
-                    <li className='px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer'>
-                      <Link href="/menu">Menu</Link>
+                    <li 
+                      className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${router.asPath==="/menu" && "text-primary"}`}
+                      onClick={()=>setIsMenuModal(false)}>
+                        <Link href="/menu">Menu</Link>
                     </li>
-                    <li className='px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer'>
-                      <Link href="/about">About</Link>
+                    <li 
+                      className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${router.asPath==="/about" && "text-primary"}`}
+                      onClick={()=>setIsMenuModal(false)}>
+                        <Link href="/about">About</Link>
                     </li>
-                    <li className='px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer'>
-                      <Link href="/reservation">Book Table</Link>
+                    <li 
+                      className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${router.asPath==="/reservation" && "text-primary"}`}
+                      onClick={()=>setIsMenuModal(false)}>
+                        <Link href="/reservation">Book Table</Link>
                     </li>
             </ul>
             {isMenuModal && (
@@ -51,18 +57,20 @@ const Header = () => {
           )}
         </nav>
         <div className='flex gap-x-4 items-center'>
-            <Link href="/auth/login"><FaUserAlt className="hover:text-primary transition-all cursor-pointer"/></Link>
+            <Link href="/auth/login">
+              <FaUserAlt size={18} className={`hover:text-primary transition-all cursor-pointer ${(router.asPath.includes("profile") || router.asPath.includes("auth")) && "text-primary"}`}/>
+            </Link>
             <Link href="/cart">
               <span className="relative">
-                <FaShoppingCart className="hover:text-primary transition-all cursor-pointer"/>
-                <span className="w-4 h-4 text-xs grid place-content-center rounded-full bg-primary absolute -top-2 -right-3 text-black font-bold">
+                <FaShoppingCart size={18} className={`hover:text-primary transition-all cursor-pointer ${router.asPath === "/cart" && "text-primary"}`}/>
+                <span className="px-[5px] text-[10px] rounded-full bg-primary absolute -top-2 -right-3 text-black inline-flex items-center justify-center font-bold">
                   {cart.products.length === 0 ? "0" : cart.products.length}
                 </span>
               </span>
               
             </Link>
             <button onClick={()=> setIsSearchModal(true)}>
-                <FaSearch className="hover:text-primary transition-all" />
+                <FaSearch size={18} className="hover:text-primary transition-all" />
             </button>
             <a href="" className="md:inline-block hidden sm">
                 <button className='btn-primary'>Order Online</button>
